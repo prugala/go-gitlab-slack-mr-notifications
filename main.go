@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/joho/godotenv"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -17,20 +18,24 @@ type Data struct {
 }
 
 type ProjectData struct {
-	Repository   string `json:"repository"`
-	Message  string `json:"msg"`
-	Channels []Channel `json:"slack_channels"`
+	Repository string    `json:"repository"`
+	Message    string    `json:"msg"`
+	Channels   []Channel `json:"slack_channels"`
+}
+
+func init() {
+	godotenv.Load(".env")
 }
 
 func main() {
-	slackClient = getClient("xoxb-834583945889-831079701299-54NDAFE9FyAI3NsmXF8AYjWe")
+	slackClient = getClient(os.Getenv("SLACK_TOKEN"))
 	data = getData("data.json")
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/gitlab-hook", mrHookHandler)
 
-	log.Printf("listening on port %s", "8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Printf("listening on port %s", os.Getenv("PORT"))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), mux))
 }
 
 func getData(fileName string) Data {
