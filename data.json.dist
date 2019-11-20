@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "repository": "http://example.com/gitlab/gitlab-test-repository",
+      "msg": "_user_ created new Merge Request in _project_ project",
+      "slack_channels": [
+        {"name": "test"}
+      ]
+    }
+  ]
+}

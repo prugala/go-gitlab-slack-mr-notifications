@@ -1,0 +1,6 @@
+.idea
+.env
+app.log
+build
+data.json
+vendor
