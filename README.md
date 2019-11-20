@@ -9,4 +9,4 @@ Send message with notification about new Gitlab Merge Request to multiple slack 
 5. Run  `go run .` or build `go build .` project
 
 ## TODO
-- Don't send message about new WIP MR and send it after remove WIP status
+- Don't send message about new with WIP status, send message when user removes WIP status
